@@ -16,7 +16,7 @@ import datetime
 
 # print(menu[3])
 # answer = 1
-localFormat = "%Y-%m-%d %H:%M:%S"
+localFormat = "%Y-%m-%d %H:%M:%S %A %z"
 menu = {"1": "Indian/Maldives",
         "2": "Indian/Mauritius",
         "3": "Indian/Mayotte",
@@ -29,15 +29,15 @@ menu = {"1": "Indian/Maldives",
 print("Choose from the following options: ")
 while True:
 
-    for key in menu:
+    for key in sorted(menu):
         print(str(key) + ": " + menu[key])
     selection = input()
-    if selection in menu:
+    if selection in sorted(menu):
         value = menu[selection]
         tz_to_display = pytz.timezone(value)
         world_time = datetime.datetime.now(tz=tz_to_display)
         utc = datetime.datetime.utcnow()
-        print("The world time in {} is {} ".format(value, world_time.strftime(localFormat), utc.strftime(localFormat)))
+        print("The world time in {} is {} ".format(value, world_time.strftime(localFormat)))
         print("The local time is {}".format(datetime.datetime.now().strftime(localFormat)))
         print("The UTC is {}".format(datetime.datetime.utcnow().strftime(localFormat)))
     elif selection == "0":
